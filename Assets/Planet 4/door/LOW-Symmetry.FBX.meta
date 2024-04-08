@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0de0a9e88782ff20d90ed5579cdeea64
+guid: 1af9b63af2110ef9fbc5c1adffc22dc7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert2
-    second: {fileID: 2100000, guid: 45b8884f26777f6899db47df9d7461db, type: 2}
+      name: Bottom
+    second: {fileID: 2100000, guid: d063cd6040655ab50be047fdd88cfa1f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert3
-    second: {fileID: 2100000, guid: b8b93becc90efe27a843e98e9db73321, type: 2}
+      name: DOOR
+    second: {fileID: 2100000, guid: 1bf77baa2214a0f02ab66e901fd10a00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LOCK1
+    second: {fileID: 2100000, guid: 67f7b9a22733fb00984004c0fe5af6bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TUBE
+    second: {fileID: 2100000, guid: d9f14e9b119daacd0baed3f0cf476f53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: emissive
+    second: {fileID: 2100000, guid: d9418eb6faccf5dd98d5750034ef1146, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lock02
+    second: {fileID: 2100000, guid: 21f286f5402fba774a200adf5a6fc9d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pillar
+    second: {fileID: 2100000, guid: e1f2a18e4345de2e6a25b430b7a6c9cc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
