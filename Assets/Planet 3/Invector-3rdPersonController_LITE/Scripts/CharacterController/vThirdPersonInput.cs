@@ -31,9 +31,14 @@ namespace Invector.vCharacterController
 
         protected virtual void FixedUpdate()
         {
-            cc.UpdateMotor();               // updates the ThirdPersonMotor methods
-            cc.ControlLocomotionType();     // handle the controller locomotion type and movespeed
-            cc.ControlRotationType();       // handle the controller rotation type
+            if (cameraMain.isActiveAndEnabled)
+            {
+                cc.UpdateMotor();               // updates the ThirdPersonMotor methods
+                cc.ControlLocomotionType();     // handle the controller locomotion type and movespeed
+                cc.ControlRotationType();       // handle the controller rotation type
+            }
+            
+            
         }
 
         protected virtual void Update()
