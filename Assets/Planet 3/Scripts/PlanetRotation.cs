@@ -10,8 +10,46 @@ public class PlanetRotation : MonoBehaviour
     private Vector3 rotationVelocity; // Vitesse de rotation actuelle
     private Vector3 lastMousePosition; // Dernière position de la souris
     private float timeSinceLastInput; // Temps écoulé depuis le dernier input de l'utilisateur
+    private Vector3 targetCapitalPosition = Vector3.zero; // Position de la capitale cible
+    private bool shouldRotateToCapital = false; // Si on doit effectuer une rotation automatique vers la capitale
+
 
     void Update()
+    {
+        if (shouldRotateToCapital)
+        {
+            // Calculez ici la rotation nécessaire pour "regarder" vers la capitale
+            Quaternion targetRotation = Quaternion.LookRotation(targetCapitalPosition - transform.position, transform.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSensitivity);
+            // Condition pour arrêter la rotation automatique, par exemple, lorsque la rotation est suffisamment proche de la cible
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.5f)
+            {
+                shouldRotateToCapital = false; // Stoppe la rotation automatique
+            }
+        }
+        else
+        {
+            // Votre logique existante de rotation manuelle et d'inertie
+            HandleManualRotation();
+        }
+    
+        // Mise à jour de la dernière position de la souris (déplacé de la logique manuelle)
+        lastMousePosition = Input.mousePosition;
+    }
+
+    public void RotateTowardsCapital(Vector3 capitalPosition)
+    {
+        targetCapitalPosition = capitalPosition - transform.position;
+        shouldRotateToCapital = true;
+    }
+
+    void RotatePlanet(Vector3 rotationSpeed)
+    {
+        // Rotation de la planète en utilisant la vitesse de rotation calculée
+        transform.Rotate(rotationSpeed, Space.World);
+    }
+
+    void HandleManualRotation()
     {
         if (Input.GetMouseButton(0))
         {
@@ -39,14 +77,7 @@ public class PlanetRotation : MonoBehaviour
                 timeSinceLastInput += Time.deltaTime;
             }
         }
-        
-        // Mise à jour de la dernière position de la souris
-        lastMousePosition = Input.mousePosition;
+        ;
     }
-
-    void RotatePlanet(Vector3 rotationSpeed)
-    {
-        // Rotation de la planète en utilisant la vitesse de rotation calculée
-        transform.Rotate(rotationSpeed, Space.World);
-    }
+    
 }

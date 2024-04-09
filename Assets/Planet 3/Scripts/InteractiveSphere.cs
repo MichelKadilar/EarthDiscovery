@@ -45,11 +45,6 @@ public class InteractiveSphere : MonoBehaviour
     }
     void OnMouseDown()
     {
-        WeatherAPI weatherAPI = FindObjectOfType<WeatherAPI>();
-        if (weatherAPI != null)
-        {
-            weatherAPI.StartCoroutine(weatherAPI.GetWeather(textMesh.text));
-        }
         SelectionManager.Instance.SelectCity(gameObject, textMesh.text);
     }
 

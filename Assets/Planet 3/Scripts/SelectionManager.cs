@@ -7,7 +7,7 @@ public class SelectionManager : MonoBehaviour
     public static SelectionManager Instance { get; private set; }
     public GameObject uiPanel; 
     public TextMeshProUGUI selectedCityText;
-
+    public TextMeshProUGUI textMesh;
     private GameObject currentSelectedCity;
 
     private void Awake()
@@ -26,6 +26,12 @@ public class SelectionManager : MonoBehaviour
 
     public void SelectCity(GameObject city, string cityName)
     {
+        
+        WeatherAPI weatherAPI = FindObjectOfType<WeatherAPI>();
+        if (weatherAPI != null)
+        {
+            weatherAPI.StartCoroutine(weatherAPI.GetWeather(selectedCityText.text));
+        }
         if (currentSelectedCity != null && currentSelectedCity != city)
         { 
             currentSelectedCity.GetComponent<InteractiveSphere>().Deselect();
