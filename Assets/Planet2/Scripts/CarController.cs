@@ -101,7 +101,6 @@ public class CarController : MonoBehaviour
       [HideInInspector]
       public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
 
-
     // Lights
 
     public Light backLightL;
@@ -133,6 +132,8 @@ public class CarController : MonoBehaviour
       float RLWextremumSlip;
       WheelFrictionCurve RRwheelFriction;
       float RRWextremumSlip;
+
+    Vector2 inputPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -243,12 +244,12 @@ public class CarController : MonoBehaviour
       A (turn left), D (turn right) or Space bar (handbrake).
       */
 
-    if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+    if(inputPlayer.y > 0){
         CancelInvoke("DecelerateCar");
         deceleratingCar = false;
         GoForward();
     }
-    if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
+    if(inputPlayer.y < 0){
         backLightL.enabled = true;
         backLightR.enabled = true;
         CancelInvoke("DecelerateCar");
@@ -256,10 +257,10 @@ public class CarController : MonoBehaviour
         GoReverse();
     }
 
-    if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
+    if(inputPlayer.x < 0){
         TurnLeft();
     }
-    if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
+    if(inputPlayer.x > 0){
         TurnRight();
     }
     if(Input.GetKey(KeyCode.Space)){
@@ -270,16 +271,16 @@ public class CarController : MonoBehaviour
     if(Input.GetKeyUp(KeyCode.Space)){
         RecoverTraction();
     }
-    if(!(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))){
+    if(!(inputPlayer.y < 0) && !(inputPlayer.y > 0)){
         ThrottleOff();
     }
-    if(!(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
+    if(!(inputPlayer.y < 0) && !(inputPlayer.y > 0) && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
         InvokeRepeating("DecelerateCar", 0f, 0.1f);
         deceleratingCar = true;
         backLightL.enabled = false;
         backLightR.enabled = false;
         }
-    if(!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && steeringAxis != 0f){
+    if(!(inputPlayer.x < 0) && !(inputPlayer.x > 0) && steeringAxis != 0f){
         ResetSteeringAngle();
     }
 
@@ -287,6 +288,11 @@ public class CarController : MonoBehaviour
       // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
       AnimateWheelMeshes();
 
+    }
+
+    public void SetInputs(Vector2 input)
+    {
+        inputPlayer = input;
     }
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
@@ -335,6 +341,7 @@ public class CarController : MonoBehaviour
       }
 
     }
+
 
     //
     //STEERING METHODS
