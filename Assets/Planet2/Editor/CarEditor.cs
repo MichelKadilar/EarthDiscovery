@@ -11,11 +11,11 @@ public class PrometeoEditor : Editor{
 
   private CarController prometeo;
   private SerializedObject SO;
-  //
-  //
-  //CAR SETUP
-  //
-  //
+//
+//
+//CAR SETUP
+//
+//
   private SerializedProperty maxSpeed;
   private SerializedProperty maxReverseSpeed;
   private SerializedProperty accelerationMultiplier;

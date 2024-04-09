@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class LapManager : MonoBehaviour
 {
     public List<SimpleCheckpoint> checkpoints;
-    public int totalLaps = 3;
     public UIManager uIManager;
-    private int lastPlayerCheckpoint = -1;
-    private int currentPlayerLap = 1;
-    private bool firstLap = true;
+    public int totalLaps = 3;
+
+    private List<PlayerRank> playerRanks = new List<PlayerRank>();
+    private PlayerRank mainPlayerRank;
+    public UnityEvent onPlayerFinished = new UnityEvent();
 
     void Start()
     {
+        StartNewGame();
         ListenCheckpoints(true);
-        uIManager.UpdateLapText(currentPlayerLap + "/" + totalLaps);
     }
 
     private void ListenCheckpoints(bool subscribe)
@@ -26,42 +29,63 @@ public class LapManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        currentPlayerLap = 1;
-        firstLap = true;
-        uIManager.UpdateLapText(currentPlayerLap + "/" + totalLaps);
+        // Get players in the scene
+        foreach (CarIdentity carIdentity in FindObjectsOfType<CarIdentity>())
+        {
+            playerRanks.Add(new PlayerRank(carIdentity));
+        }
+        mainPlayerRank = playerRanks.Find(player => player.identity.gameObject.tag == "Player");
+        uIManager.UpdateLapText(((mainPlayerRank.lapNumber == 0) ? 1 : mainPlayerRank.lapNumber) + "/" + totalLaps);
+        uIManager.UpdateWinnerText("");
     }
 
-    public void CheckpointActivated(GameObject car, SimpleCheckpoint checkpoint)
+    public void CheckpointActivated(CarIdentity car, SimpleCheckpoint checkpoint)
     {
-        if (checkpoints.Contains(checkpoint))
+        PlayerRank player = playerRanks.Find((rank) => rank.identity == car);
+        if (checkpoints.Contains(checkpoint) && player != null)
         {
-            if (firstLap)
-            {
-                firstLap = false;
-                return;
-            }
+            // if player has already finished ir first lap don't do anything
+            if (player.hasFinished) return;
+            
             int checkpointNumber = checkpoints.IndexOf(checkpoint);
             // first time ever the car reach the first checkpoint
-            bool startingFirstLap = checkpointNumber == 0 && lastPlayerCheckpoint == -1;
+            bool startingFirstLap = checkpointNumber == 0 && player.lastCheckpoint == -1;
             // finish line checkpoint is triggered & last checkpoint was reached
-            bool lapIsFinished = checkpointNumber == 0 && lastPlayerCheckpoint >= checkpoints.Count - 1;
+            bool lapIsFinished = checkpointNumber == 0 && player.lastCheckpoint >= checkpoints.Count - 1;
             if (startingFirstLap || lapIsFinished)
             {
-                currentPlayerLap += 1;
-                lastPlayerCheckpoint = 0;
+                player.lapNumber += 1;
+                player.lastCheckpoint = 0;
 
                 // if this was the final lap
-                if (currentPlayerLap > totalLaps)
+                if (player.lapNumber > totalLaps)
                 {
-                    Debug.Log("You won");
+                    player.hasFinished = true;
+                    // getting final rank, by finding number of finished players
+                    player.rank = playerRanks.FindAll(player => player.hasFinished).Count;
+
+                    // if first winner, display its name
+                    if (player.rank == 1)
+                    {
+                        uIManager.UpdateWinnerText("1er, félicaition tu as gagné !");
+                    }
+                    else if (player == mainPlayerRank) // display player rank if not winner
+                    {
+                        uIManager.UpdateWinnerText("Bravo, tu as fini à la " + mainPlayerRank.rank + "e place !");
+                    }
+
+                    if (player == mainPlayerRank) onPlayerFinished.Invoke();
                 }
                 else
                 {
-                    uIManager.UpdateLapText(currentPlayerLap + "/" + totalLaps);
+                    if (car.gameObject.tag == "Player") uIManager.UpdateLapText(player.lapNumber + "/" + totalLaps);
                 }
             }
             // next checkpoint reached
-            else if (checkpointNumber == lastPlayerCheckpoint + 1) lastPlayerCheckpoint += 1;
+            else if (checkpointNumber == player.lastCheckpoint + 1)
+            {
+                player.lastCheckpoint += 1;
+            }
         }
     }
 }

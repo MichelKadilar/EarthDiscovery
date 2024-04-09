@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SimpleCheckpoint : MonoBehaviour
 {
-    public UnityEvent<GameObject, SimpleCheckpoint> onCheckpointEnter;
+    public UnityEvent<CarIdentity, SimpleCheckpoint> onCheckpointEnter;
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "Player")
+        CarIdentity carIdentity = collider.GetComponent<CarIdentity>();
+        if (carIdentity != null)
         {
-            onCheckpointEnter.Invoke(collider.gameObject, this);
+            onCheckpointEnter.Invoke(carIdentity, this);
         }
     }
 }

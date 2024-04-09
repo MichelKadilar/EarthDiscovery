@@ -1,29 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
 public class PlayerControls : MonoBehaviour
 {
     public UnityEvent<Vector2> onInput;
 
-    public Rigidbody rg;
-    public float forwardMoveSpeed;
-    public float backwardMoveSpeed;
-    public float steerSpeed;
+    private Vector2 inputPlayer;
 
-    private float inputX;
-    private float inputY;
-
-    void Update() // Get keyboard inputs
+    void Update()
     {
-        inputY = Input.GetAxis("Vertical");
-        inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal");
 
-        Vector2 inputPlayer = new Vector2(inputX, inputY).normalized;
-        onInput.Invoke(inputPlayer);
+        inputPlayer = new Vector2(inputX, inputY).normalized;
     }
 
+    void FixedUpdate()
+    {
+        onInput.Invoke(inputPlayer);
+    }
 }
