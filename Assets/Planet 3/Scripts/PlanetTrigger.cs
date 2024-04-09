@@ -5,6 +5,8 @@ public class PlanetTrigger : MonoBehaviour
     public GameObject playerCamera;
     public GameObject planetCamera;
     public GameObject spaceObject;
+    public GameObject firstPlane;
+    public GameObject secondPlane;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,6 +17,9 @@ public class PlanetTrigger : MonoBehaviour
             spaceObject.SetActive(questManager.currentQuestIndex>1);
             if(questManager.currentQuestIndex == 1)
             {
+                MovePlane movePlane = FindObjectOfType<MovePlane>();
+                firstPlane.SetActive(false);
+                secondPlane.SetActive(true);
                 questManager.CompleteCurrentQuest();
             }
             planetCamera.SetActive(true);
