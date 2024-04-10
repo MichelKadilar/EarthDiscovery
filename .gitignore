@@ -46,6 +46,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.DS_Store
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -72,5 +73,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Too big textures
-Assets/Planet2/CartoonTracksPack1/Track1/Textures/road.psd
-Assets/Planet2/CartoonTracksPack1/Track1/Textures/garages.psd
+Assets/Planet2/Track/Textures/road.psd
+Assets/Planet2/Track/Textures/garages.psd
