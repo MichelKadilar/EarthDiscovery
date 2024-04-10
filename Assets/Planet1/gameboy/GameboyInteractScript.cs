@@ -31,6 +31,6 @@ public class GameboyInteractScript : MonoBehaviour
         camera.enabled = !camera.enabled;
         animator.SetTrigger("OnPlayerInteraction");
         camera.enabled = !camera.enabled;
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Planet2/Planet2Scene");
     }
 }
