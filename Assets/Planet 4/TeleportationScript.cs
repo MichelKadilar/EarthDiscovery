@@ -16,6 +16,8 @@ public class TeleportationScript : MonoBehaviour
 
     public Light lightningLight;
     
+    public GameObject Princess;
+    
     [Space(10)]
     [Header("The text to Display on Trigger")]
     [Tooltip("To edit the look of the text Go to Assets > Create > GUIskin. Add the new Guiskin to the Custom Skin proptery. If you select the GUIskin in your project tab you can now adjust the Label section to change this text")]
@@ -41,6 +43,8 @@ public class TeleportationScript : MonoBehaviour
                 emission.rateOverTime = emissionRate + i/10;
                 lightningLight.intensity += i /10;
             }
+            Destroy(Princess);
+            Text = "The princess has been teleported home.";
         }
     }
     
@@ -69,7 +73,7 @@ public class TeleportationScript : MonoBehaviour
             GUI.skin = customSkin;
         }
 
-        if (GuiOn == true && GameObject.Find("kirbyBurningScript").GetComponent<BurnScript>().isKirbyBurned )
+        if (GuiOn == true && GameObject.Find("kirbyBurnScript").GetComponent<BurnScript>().isKirbyBurned )
         {
             // Make a group on the center of the screen
             GUI.BeginGroup (new Rect ((Screen.width - BoxSize.width) / 2, (Screen.height - BoxSize.height) / 2, BoxSize.width, BoxSize.height));
