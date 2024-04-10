@@ -32,7 +32,7 @@ public class TeleportationScript : MonoBehaviour
 
     void Update()
     {
-        if (GuiOn && GameObject.Find("kirbyBurningScript").GetComponent<BurnScript>().isKirbyBurned && Input.GetKeyDown(KeyCode.F))
+        if (GuiOn && GameObject.Find("kirbyBurnScript").GetComponent<BurnScript>().isKirbyBurned && Input.GetKeyDown(KeyCode.F))
         {
             var emission = lightning.emission;
             for (int i = 0; i < 10000; i++)

@@ -20,7 +20,7 @@ public class WeatherAPI : MonoBehaviour
 
             if (UnityWebRequest.Result.ConnectionError == webRequest.result || UnityWebRequest.Result.ProtocolError == webRequest.result)
             {
-                Debug.LogError("Erreur lors de l'accès à l'API météo: " + city);
+                Debug.LogError("Erreur lors de l'accès à l'API météo: " + webRequest.error);
             }
             else
             {
