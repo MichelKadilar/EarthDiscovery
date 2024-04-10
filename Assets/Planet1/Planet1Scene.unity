@@ -223,7 +223,6 @@ GameObject:
   - component: {fileID: 48524000}
   - component: {fileID: 48524003}
   - component: {fileID: 48524002}
-  - component: {fileID: 48524001}
   - component: {fileID: 48524004}
   m_Layer: 0
   m_Name: camera_gameboy
@@ -247,18 +246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 474658136}
   m_LocalEulerAnglesHint: {x: 59.145, y: 180, z: 0}
---- !u!114 &48524001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 48523999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &48524002
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1555,6 +1542,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 474658136}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d8e20709e6bc0d3419f7771084332d46, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d8e20709e6bc0d3419f7771084332d46, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d8e20709e6bc0d3419f7771084332d46, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d8e20709e6bc0d3419f7771084332d46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1267.45
       objectReference: {fileID: 0}
@@ -1987,7 +1986,6 @@ GameObject:
   - component: {fileID: 447820870}
   - component: {fileID: 447820873}
   - component: {fileID: 447820872}
-  - component: {fileID: 447820871}
   m_Layer: 0
   m_Name: camera_raquette
   m_TagString: Untagged
@@ -2010,18 +2008,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 52283327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &447820871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447820869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &447820872
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8242,7 +8228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 48524003}
-  waitSeconds: 6
+  waitSeconds: 1.5
   animator: {fileID: 48524004}
   isInteractable: 1
 --- !u!1 &1961932860

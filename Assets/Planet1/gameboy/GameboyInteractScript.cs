@@ -21,16 +21,17 @@ public class GameboyInteractScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         camera.enabled = true;
-        InteractCoroutine();
+        StartCoroutine(InteractCoroutine());
     }
 
-    void InteractCoroutine()
+    IEnumerator InteractCoroutine()
     {
         // Implement interaction logic here
         Debug.Log("Interacting with " + gameObject.name);
-        camera.enabled = !camera.enabled;
         animator.SetTrigger("OnPlayerInteraction");
-        camera.enabled = !camera.enabled;
+        yield return new WaitForSeconds(waitSeconds);
         SceneManager.LoadScene("Planet2/Planet2Scene");
+        yield return new WaitForSeconds(1);
+        camera.enabled = false;
     }
 }
