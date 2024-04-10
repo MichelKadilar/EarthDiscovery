@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class door : MonoBehaviour
 {
-
     [SerializeField] private Animator myDoor = null;
 
     [SerializeField] private bool openTrigger = false;
