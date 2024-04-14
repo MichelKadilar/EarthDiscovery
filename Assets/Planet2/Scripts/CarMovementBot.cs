@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarMovementBot : MonoBehaviour
@@ -5,6 +6,7 @@ public class CarMovementBot : MonoBehaviour
     // Vitesse de déplacement
     public float forwardMoveSpeed = 5000f;
     public float backwardMoveSpeed = 2500f;
+    public float brakeForce = 3000f;
     private Vector2 inputPlayer;
     // Vitesse et angle de direction
     public float steerSpeed = 30f;
@@ -28,10 +30,19 @@ public class CarMovementBot : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Appliquer la force d'accélération aux roues arrière
         float speed = inputPlayer.y > 0 ? forwardMoveSpeed : backwardMoveSpeed;
+        float currentSpeed = rearLeftCollider.rpm * (2 * Mathf.PI * rearLeftCollider.radius) * 60 / 1000;  // Calculer la vitesse actuelle en km/h
+        float brake = (currentSpeed > 0 && inputPlayer.y < 0) ? brakeForce : 0f;
+        
         rearLeftCollider.motorTorque = inputPlayer.y * speed;
         rearRightCollider.motorTorque = inputPlayer.y * speed;
+
+        // Appliquer le freinage à tous les WheelColliders
+        frontLeftCollider.brakeTorque = brake;
+        frontRightCollider.brakeTorque = brake;
+        rearLeftCollider.brakeTorque = brake;
+        rearRightCollider.brakeTorque = brake;
+    
 
         // Appliquer la direction aux roues avant
         float steerAngle = inputPlayer.x * steerSpeed;
@@ -48,6 +59,11 @@ public class CarMovementBot : MonoBehaviour
         UpdateWheelPosition(frontRightCollider, frontRightMesh);
         UpdateWheelPosition(rearLeftCollider, rearLeftMesh);
         UpdateWheelPosition(rearRightCollider, rearRightMesh);
+    }
+    
+    public float CurrentSpeed
+    {
+        get { return rearLeftCollider.rpm * (2 * Mathf.PI * rearLeftCollider.radius) * 60 / 1000; } // Convertit rpm en km/h
     }
 
     void UpdateWheelPosition(WheelCollider collider, GameObject mesh)
