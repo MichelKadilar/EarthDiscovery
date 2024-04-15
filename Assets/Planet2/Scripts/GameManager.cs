@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour
             ResetCarsToStartPosition();
         }
     }
+    
+    // Enable or disable the winner text in the UI
+    public void EnableWinnerText(bool enable)
+    {
+        uIManager.UpdateWinnerText(enable ? "WINNER !" : "");
+    }
 
     public void StartGame()
     {

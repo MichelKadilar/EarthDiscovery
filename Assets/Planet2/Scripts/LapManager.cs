@@ -13,6 +13,9 @@ public class LapManager : MonoBehaviour
     private List<PlayerRank> playerRanks = new List<PlayerRank>();
     private PlayerRank mainPlayerRank;
     public UnityEvent onPlayerFinished = new UnityEvent();
+    public GameObject uIWinner;
+    public AudioSource audioWinner;
+    public AudioSource audioTheme;
 
     void Start()
     {
@@ -41,6 +44,9 @@ public class LapManager : MonoBehaviour
         mainPlayerRank = playerRanks.Find(player => player.identity.gameObject.tag == "Player");
         uIManager.UpdateLapText(mainPlayerRank.lapNumber + "/" + totalLaps);
         uIManager.UpdateWinnerText("");
+        uIManager.UpdateSubTextWinner("");
+        audioWinner.Stop();
+        audioTheme.Play();
     }
 
     public void CheckpointActivated(CarIdentity car, SimpleCheckpoint checkpoint)
@@ -77,10 +83,16 @@ public class LapManager : MonoBehaviour
                     if (player.rank == 1 && player == mainPlayerRank)
                     {
                         uIManager.UpdateWinnerText("1er, félicaition tu as gagné !");
+                        uIManager.UpdateSubTextWinner("Clique sur ECHAP pour récupérer ta récompense !");
+                        uIWinner.SetActive(true);
+                        audioTheme.Stop();
+                        audioWinner.Play();
                     }
                     else if (player == mainPlayerRank) // display player rank if not winner
                     {
                         uIManager.UpdateWinnerText("Dommage, tu as fini à la " + mainPlayerRank.rank + "e place !");
+                        uIManager.UpdateSubTextWinner("Clique sur ECHAP pour recommencer !");
+                        audioTheme.Stop();
                     }
 
                     if (player == mainPlayerRank) onPlayerFinished.Invoke();
