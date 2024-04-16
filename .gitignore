@@ -71,7 +71,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
-# Too big textures
-Assets/Planet2/Track/Textures/road.psd
-Assets/Planet2/Track/Textures/garages.psd
