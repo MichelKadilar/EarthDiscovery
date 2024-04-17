@@ -19,8 +19,11 @@ public class InteractiveSphere : MonoBehaviour
     {
         originalScale = transform.localScale;
         originalColor = GetComponent<Renderer>().material.color;
-        orignalTextColor = textMesh.color;
-        originalFontSize = textMesh.fontSize;
+        if (textMesh != null)
+        {
+            orignalTextColor = textMesh.color;
+            originalFontSize = textMesh.fontSize; 
+        }
     }
 
     void OnMouseEnter()

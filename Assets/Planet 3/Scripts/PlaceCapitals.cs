@@ -63,7 +63,6 @@ public class PlaceCapitals : MonoBehaviour
                 capitalPositions.Add(position);
             }
         }
-        Debug.Log(capitalNames.Count + " capitales placées.");
     }
 
     Vector3 LatLongToPositionOnSphere(float latitude, float longitude, float radius)

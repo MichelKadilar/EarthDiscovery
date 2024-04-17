@@ -6,15 +6,22 @@ public class FaceCamera : MonoBehaviour
 {
     void Update()
     {
-        Transform newCamera = Camera.main.transform;
-        // Fait face à la caméra
-        Vector3 directionToCamera = transform.position - newCamera.transform.position;
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            Transform newCamera = mainCamera.transform;
+            Vector3 directionToCamera = transform.position - newCamera.position;
         
-        // Annule la rotation sur l'axe y pour éviter l'inclinaison du texte
-        directionToCamera.y = 0;
+            // Reset the Y component of directionToCamera to avoid tilting the text
+            directionToCamera.y = 0;
 
-        // Applique la rotation
-        transform.rotation = Quaternion.LookRotation(directionToCamera);
+            // Apply the rotation to face the camera
+            transform.rotation = Quaternion.LookRotation(directionToCamera);
+        }
+        else
+        {
+            Debug.LogWarning("Main camera not found. Check if it's tagged as 'MainCamera' and active.");
+        }
     }
 }
 
