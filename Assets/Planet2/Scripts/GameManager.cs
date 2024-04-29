@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
         if (!isCountingDown) yield break;
 
         yield return new WaitForSeconds(1);
-        tricolorLights.SetProgress(1);
-        uIManager.UpdateWinnerText("1");
+        tricolorLights.SetProgress(3);
+        uIManager.UpdateWinnerText("3");
         if(audioSource.enabled) audioSource.PlayOneShot(lowBeep);
 
         yield return new WaitForSeconds(1);
@@ -107,8 +107,8 @@ public class GameManager : MonoBehaviour
         if (audioSource.enabled) audioSource.PlayOneShot(lowBeep);
 
         yield return new WaitForSeconds(1);
-        tricolorLights.SetProgress(3);
-        uIManager.UpdateWinnerText("3");
+        tricolorLights.SetProgress(1);
+        uIManager.UpdateWinnerText("1");
         if (audioSource.enabled) audioSource.PlayOneShot(lowBeep);
 
         yield return new WaitForSeconds(1);

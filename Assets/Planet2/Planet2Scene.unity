@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1817236227}
-  m_IndirectSpecularColor: {r: 0.18384446, g: 0.22859347, b: 0.30080935, a: 1}
+  m_IndirectSpecularColor: {r: 0.18384448, g: 0.22859347, b: 0.30081007, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1157,7 +1157,19 @@ MonoBehaviour:
   totalLaps: 1
   onPlayerFinished:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 209246453}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: ReturnHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   uIWinner: {fileID: 314992250}
   audioWinner: {fileID: 1544267718}
   audioTheme: {fileID: 1985374087}
@@ -4060,7 +4072,7 @@ SpriteRenderer:
   m_Size: {x: 16.24, y: 8.13}
   m_AdaptiveModeThreshold: 0.782
   m_SpriteTileMode: 1
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &775768413
@@ -5008,7 +5020,7 @@ SpriteRenderer:
   m_Size: {x: 16.24, y: 8.13}
   m_AdaptiveModeThreshold: 0.782
   m_SpriteTileMode: 1
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!146 &1056683711 stripped
@@ -7241,7 +7253,7 @@ SpriteRenderer:
   m_Size: {x: 16.24, y: 8.13}
   m_AdaptiveModeThreshold: 0.782
   m_SpriteTileMode: 1
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!146 &1601610524 stripped

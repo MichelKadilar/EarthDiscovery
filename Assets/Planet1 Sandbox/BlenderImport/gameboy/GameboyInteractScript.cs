@@ -9,6 +9,7 @@ public class GameboyInteractScript : MonoBehaviour
     public Camera camera;
     public float waitSeconds;
     public Animator animator;
+    public GameObject gameObject;
 
     public bool isInteractable = true;
     public bool hasBeenInteractedWith = false;
@@ -23,6 +24,7 @@ public class GameboyInteractScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         StartCoroutine(InteractCoroutine());
+        Time.timeScale = 1;
     }
 
     IEnumerator InteractCoroutine()
@@ -42,5 +44,6 @@ public class GameboyInteractScript : MonoBehaviour
         asyncLoad.allowSceneActivation = true;
         camera.enabled = false;
         hasBeenInteractedWith = false;
+        //gameObject.SetActive(false);
     }
 }

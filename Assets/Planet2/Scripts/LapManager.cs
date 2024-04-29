@@ -82,7 +82,7 @@ public class LapManager : MonoBehaviour
                     // if first winner, display its name
                     if (player.rank == 1 && player == mainPlayerRank)
                     {
-                        uIManager.UpdateWinnerText("1er, félicaition tu as gagné !");
+                        uIManager.UpdateWinnerText("1er, félicitations, tu as gagné !");
                         uIManager.UpdateSubTextWinner("Clique sur ECHAP pour récupérer ta récompense !");
                         uIWinner.SetActive(true);
                         audioTheme.Stop();
